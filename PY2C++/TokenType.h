@@ -1,4 +1,7 @@
+#ifndef TOKENTYPE_H
+#define TOKENTYPE_H
 #include <iostream>
+#endif
 
 enum TokenType{
     // Single character tokens
