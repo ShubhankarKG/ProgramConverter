@@ -4,13 +4,17 @@
 #include <string>
 #endif
 
-using namespace std;
-class ProgramConverter {
-    public :
-    static bool hadError;
-    void error(int line, string message);
-    void runFile(string path);
-    void runPrompt();
-    void run(string source);
-    void report(int line, string where, string message);
-};
+namespace ProjectConverter{
+
+    using namespace std;
+    class ProgramConverter {
+        public :
+        static bool hadError;
+        void error(int line, string message);
+        void runFile(string path);
+        void runPrompt();
+        void run(string source);
+        void report(int line, string where, string message);
+    };
+
+}

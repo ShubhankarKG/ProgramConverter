@@ -3,24 +3,27 @@
 #include <iostream>
 #endif
 
-enum TokenType{
-    // Single character tokens
-    LEFT_PARAN, RIGHT_PARAN, LEFT_BRACE, RIGHT_BRACE,
-    COMMA, DOT, MINUS, PLUS, SEMICOLON, SLASH, STAR,
+namespace ProjectConverter{
 
-    // One or Two character tokens
-    NOT, NOT_EQUAL,
-    EQUAL, EQUAL_EQUAL,
-    GREATER, GREATER_EQUAL,
-    LESS, LESS_EQUAL,
+    enum TokenType{
+        // Single character tokens
+        LEFT_PARAN, RIGHT_PARAN, LEFT_BRACE, RIGHT_BRACE,
+        COMMA, DOT, MINUS, PLUS, SEMICOLON, SLASH, STAR,
 
-    // Literals
-    IDENTIFIER, STRING, NUMBER,
+        // One or Two character tokens
+        LOGICAL_NOT, NOT_EQUAL,
+        EQUAL, EQUAL_EQUAL,
+        GREATER, GREATER_EQUAL,
+        LESS, LESS_EQUAL,
 
-    //Keywords
-    AND, CLASS, ELSE, FALSE, FUN, FOR, IF, NIL, OR,
-    PRINT, RETURN, SUPER, THIS, TRUE, VAR, WHILE,
+        // Literals
+        IDENTIFIER, STRING, NUMBER,
 
-    EOFile
+        //Keywords
+        FALSE, NONE, TRUE, AND, AS, ASSERT, AYNC,AWAIT, BREAK,
+        CLASS, CONTINUE, DEF, DEL, ELIF, ELSE, EXCEPT, FINALLY, FOR, FROM,
+        GLOBAL, IF, IMPORT, IN, IS, LAMBDA, NONLOCAL, NOT, OR, PASS,
+        RAISE, RETURN, TRY, WHILE, WITH, YIELD
+    };
 
-};
+}

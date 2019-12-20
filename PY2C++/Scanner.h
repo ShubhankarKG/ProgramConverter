@@ -1,6 +1,6 @@
 #ifndef SCANNER_H
 #define SCANNER_H
-#include "TokenType.h"
+#include "Token.h"
 #include <string>
 #include <unordered_map>
 #include <list>
@@ -8,32 +8,44 @@
 #endif
 
 using namespace std;
-class Token;
 
-class Scanner{
-    string source;
-    list <Token*> tokens;
-    static int start;
-    static int current;
-    static int line;
-    
+namespace ProjectConverter {
+    class Token;
+}
 
-    public :
-    static unordered_map <string, TokenType> keywords;
-    Scanner(string source);
-    list <Token*> scanTokens();
-    bool isAtEnd();
-    void scanToken();
-    void identifier();
-    bool isAlpha(char c);
-    bool isDigit(char c);
-    bool isAlphaNumeric(char c);
-    void number();
-    void isString();
-    char peek();
-    char peekNext();
-    bool match(char expected);
-    char advance();
-    void addToken(TokenType token);
-    //void addToken(TokenType token, any literal);
-};
+namespace ProjectConverter {
+    class Scanner{
+        string source;
+        list <Token*> tokens;
+        static int start;
+        static int current;
+        static int line;
+        static unordered_map <string, TokenType> keywords;
+
+        class StaticConstructor{
+            public:
+            StaticConstructor();
+        };
+        static StaticConstructor staticConstructor;
+        public :
+        
+		Scanner();
+        Scanner(string source);
+        list <Token*> scanTokens();
+        bool isAtEnd();
+        void scanToken();
+        void identifier();
+        bool isAlpha(char c);
+        bool isDigit(char c);
+        bool isAlphaNumeric(char c);
+        void number();
+        void isString();
+        char peek();
+        char peekNext();
+        bool match(char expected);
+        char advance();
+        void addToken(TokenType token);
+        void addToken(TokenType token, string literal);
+    };
+
+}
