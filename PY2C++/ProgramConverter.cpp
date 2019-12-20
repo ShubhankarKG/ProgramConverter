@@ -13,7 +13,7 @@ namespace ProjectConverter{
         Scanner* sc = new Scanner(source);
         list <Token*> tokens = sc->scanTokens();
         for (auto token : tokens){
-            cout << token << endl;
+            cout << token->toString() << endl;
         }
     }
 

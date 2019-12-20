@@ -20,15 +20,15 @@ namespace ProjectConverter {
         static int start;
         static int current;
         static int line;
-        static unordered_map <string, TokenType> keywords;
-
+        /*    
         class StaticConstructor{
             public:
             StaticConstructor();
         };
         static StaticConstructor staticConstructor;
+        */
         public :
-        
+        unordered_map <string, TokenType> keywords;
 		Scanner();
         Scanner(string source);
         list <Token*> scanTokens();

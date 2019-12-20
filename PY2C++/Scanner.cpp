@@ -7,52 +7,47 @@ namespace ProjectConverter {
 	int Scanner :: current = 0;
 	int Scanner :: line = 1;
 
-	std :: unordered_map<std::string, TokenType> Scanner::keywords;
-	
-	Scanner :: StaticConstructor :: StaticConstructor() {
-		//keywords = new unordered_map<string, TokenType>;
-		keywords.emplace("False", FALSE);
-		keywords.emplace("None", NONE);
-		keywords.emplace("True", TRUE);
-		keywords.emplace("and", AND);
-		keywords.emplace("as", AS);
-		keywords.emplace("assert", ASSERT);
-		keywords.emplace("async", AYNC);
-		keywords.emplace("await", AWAIT);
-		keywords.emplace("break", BREAK);
-		keywords.emplace("class", CLASS);
-		keywords.emplace("continue", CONTINUE);
-		keywords.emplace("def", DEF);
-		keywords.emplace("del", DEL);
-		keywords.emplace("elif", ELIF);
-		keywords.emplace("else", ELSE);
-		keywords.emplace("except", EXCEPT);
-		keywords.emplace("finally", FINALLY);
-		keywords.emplace("for", FOR);
-		keywords.emplace("from", FROM);
-		keywords.emplace("global", GLOBAL);
-		keywords.emplace("if", IF);
-		keywords.emplace("import", IMPORT);
-		keywords.emplace("in", IN);
-		keywords.emplace("is", IS);
-		keywords.emplace("lambda", LAMBDA);
-		keywords.emplace("nonlocal", NONLOCAL);
-		keywords.emplace("not", NOT);
-		keywords.emplace("or", OR);
-		keywords.emplace("pass", PASS);
-		keywords.emplace("raise", RAISE);
-		keywords.emplace("return", RETURN);
-		keywords.emplace("try", TRY);
-		keywords.emplace("while", WHILE);
-		keywords.emplace("with", WITH);
-		keywords.emplace("yield", YIELD);
-	}
+	//std :: unordered_map<std::string, TokenType> Scanner::keywords;
 	
 	// Scanner :: StaticConstructor Scanner:: StaticConstructor;
 
 	Scanner :: Scanner(string source){
 		this->source = source;
-		
+		keywords.emplace("False", FALSE);
+		keywords.emplace("None", NONE);
+		keywords.emplace("True", TRUE);
+		// keywords.emplace("and", AND);
+		// keywords.emplace("as", AS);
+		// keywords.emplace("assert", ASSERT);
+		// keywords.emplace("async", AYNC);
+		// keywords.emplace("await", AWAIT);
+		// keywords.emplace("break", BREAK);
+		// keywords.emplace("class", CLASS);
+		// keywords.emplace("continue", CONTINUE);
+		// keywords.emplace("def", DEF);
+		// keywords.emplace("del", DEL);
+		// keywords.emplace("elif", ELIF);
+		// keywords->emplace("else", ELSE);
+		// keywords->emplace("except", EXCEPT);
+		// keywords->emplace("finally", FINALLY);
+		// keywords->emplace("for", FOR);
+		// keywords->emplace("from", FROM);
+		// keywords->emplace("global", GLOBAL);
+		// keywords->emplace("if", IF);
+		// keywords->emplace("import", IMPORT);
+		// keywords->emplace("in", IN);
+		// keywords->emplace("is", IS);
+		// keywords->emplace("lambda", LAMBDA);
+		// keywords->emplace("nonlocal", NONLOCAL);
+		// keywords->emplace("not", NOT);
+		// keywords->emplace("or", OR);
+		// keywords->emplace("pass", PASS);
+		// keywords->emplace("raise", RAISE);
+		// keywords->emplace("return", RETURN);
+		// keywords->emplace("try", TRY);
+		// keywords->emplace("while", WHILE);
+		// keywords->emplace("with", WITH);
+		// keywords->emplace("yield", YIELD);
 	}
 
 	Scanner :: Scanner(){
