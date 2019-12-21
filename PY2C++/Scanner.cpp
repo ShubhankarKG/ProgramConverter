@@ -1,7 +1,7 @@
 #include "Scanner.h"
 //#include "Token.h"
 #include "ProgramConverter.h"
-
+#include <stdio.h>
 int Scanner :: start = 0;
 int Scanner :: current = 0;
 int Scanner :: line = 1;
@@ -12,41 +12,43 @@ int Scanner :: line = 1;
 
 Scanner :: Scanner(string source){
 	this->source = source;
+	start = 0;
+	current = 0;
 	keywords.emplace("False", FALSE);
 	keywords.emplace("None", NONE);
 	keywords.emplace("True", TRUE);
-	// keywords.emplace("and", AND);
-	// keywords.emplace("as", AS);
-	// keywords.emplace("assert", ASSERT);
-	// keywords.emplace("async", AYNC);
-	// keywords.emplace("await", AWAIT);
-	// keywords.emplace("break", BREAK);
-	// keywords.emplace("class", CLASS);
-	// keywords.emplace("continue", CONTINUE);
-	// keywords.emplace("def", DEF);
-	// keywords.emplace("del", DEL);
-	// keywords.emplace("elif", ELIF);
-	// keywords->emplace("else", ELSE);
-	// keywords->emplace("except", EXCEPT);
-	// keywords->emplace("finally", FINALLY);
-	// keywords->emplace("for", FOR);
-	// keywords->emplace("from", FROM);
-	// keywords->emplace("global", GLOBAL);
-	// keywords->emplace("if", IF);
-	// keywords->emplace("import", IMPORT);
-	// keywords->emplace("in", IN);
-	// keywords->emplace("is", IS);
-	// keywords->emplace("lambda", LAMBDA);
-	// keywords->emplace("nonlocal", NONLOCAL);
-	// keywords->emplace("not", NOT);
-	// keywords->emplace("or", OR);
-	// keywords->emplace("pass", PASS);
-	// keywords->emplace("raise", RAISE);
-	// keywords->emplace("return", RETURN);
-	// keywords->emplace("try", TRY);
-	// keywords->emplace("while", WHILE);
-	// keywords->emplace("with", WITH);
-	// keywords->emplace("yield", YIELD);
+	keywords.emplace("and", AND);
+	keywords.emplace("as", AS);
+	keywords.emplace("assert", ASSERT);
+	keywords.emplace("async", AYNC);
+	keywords.emplace("await", AWAIT);
+	keywords.emplace("break", BREAK);
+	keywords.emplace("class", CLASS);
+	keywords.emplace("continue", CONTINUE);
+	keywords.emplace("def", DEF);
+	keywords.emplace("del", DEL);
+	keywords.emplace("elif", ELIF);
+	keywords.emplace("else", ELSE);
+	keywords.emplace("except", EXCEPT);
+	keywords.emplace("finally", FINALLY);
+	keywords.emplace("for", FOR);
+	keywords.emplace("from", FROM);
+	keywords.emplace("global", GLOBAL);
+	keywords.emplace("if", IF);
+	keywords.emplace("import", IMPORT);
+	keywords.emplace("in", IN);
+	keywords.emplace("is", IS);
+	keywords.emplace("lambda", LAMBDA);
+	keywords.emplace("nonlocal", NONLOCAL);
+	keywords.emplace("not", NOT);
+	keywords.emplace("or", OR);
+	keywords.emplace("pass", PASS);
+	keywords.emplace("raise", RAISE);
+	keywords.emplace("return", RETURN);
+	keywords.emplace("try", TRY);
+	keywords.emplace("while", WHILE);
+	keywords.emplace("with", WITH);
+	keywords.emplace("yield", YIELD);
 }
 
 Scanner :: Scanner(){
@@ -54,20 +56,27 @@ Scanner :: Scanner(){
 }
 
 void Scanner :: addToken(TokenType type){
-	addToken(type,'Y');
+	addToken(type, "");
 }
 
 void Scanner :: addToken(TokenType type, string literal){
 	string text = source.substr(start, current);
 	std :: cout << text <<"\n";
-	std :: cout << "Done adding \n";
+	
 	Token tempVar(type, text, literal, line);
 	tokens.push_back(tempVar);
+	std :: cout << "Token added\n";
 }
 
 void Scanner :: addToken(TokenType type, long double fliteral){
 	string text = source.substr(start, current);
 	Token tempVar(type, text, fliteral, line);
+	tokens.push_back(tempVar);
+}
+
+void Scanner :: addToken(TokenType type, long long int lliliteral){
+	string text = source.substr(start, current);
+	Token tempVar(type, text, lliliteral, line);
 	tokens.push_back(tempVar);
 }
 
@@ -117,11 +126,20 @@ void Scanner :: isString(){
 
 void Scanner :: number(){
 	while (isDigit(peek())) advance();
+	bool floating = false;	// integer by default
 	if (peek() == '.' && isDigit(peekNext())){
+		if(peek() == '.')	floating = true;
 		advance();
 		while(isDigit(peek())) advance();
 	}
-	//addToken(NUMBER, stod(source.substr(start, current)));
+	// addToken(NUMBER, stod(source.substr(start, current)));
+	string num = source.substr(start, current);
+	if(floating) {
+		addToken(NUMBER, stold(num));
+	}
+	else {
+		addToken(NUMBER, stoll(num));
+	}
 }
 
 bool Scanner :: isAlphaNumeric(char c){
@@ -139,15 +157,23 @@ bool Scanner :: isAlpha(char c){
 }
 
 void Scanner :: identifier(){
+	int count = 0;
 	while (isAlphaNumeric(peek())) {
 		advance();
+		cout << "count=" << count << endl;
+		count++;	
 	}
 	string text = source.substr(start, current);
+	cout << text << endl;
 	unordered_map<string, TokenType> :: iterator i;
 	TokenType type;
 	i = keywords.find(text);
-	type = i->second;
-	if (i == keywords.end()) type = IDENTIFIER;
+	if(i != keywords.end()) {
+		type = i -> second;
+	}
+	else {
+		type = IDENTIFIER;
+	}
 	addToken(type);
 }
 
@@ -190,19 +216,19 @@ void Scanner :: scanToken(){
 
 	case '"' : isString(); break;
 
-	// default : 
-	// 	if (isDigit(c)) {
-	// 		number();
-	// 	}
-	// 	else if (isAlpha(c)) {
-	// 		identifier();
-	// 	}
-	// 	else {
-	// 		//ProgramConverter::error(line, "Unterminated string.");
-	// 		ProgramConverter pc;
-	// 		pc.error(line, "Unterminated string.");
-	// 	}
-	// 	break;
+	default : 
+		if (isDigit(c)) {
+			number();
+		}
+		else if (isAlpha(c)) {
+			identifier();
+		}
+		else {
+			//ProgramConverter::error(line, "Unterminated string.");
+			ProgramConverter pc;
+			pc.error(line, "Unterminated string.");
+		}
+		break;
 	}
 }
 
@@ -218,7 +244,7 @@ vector <Token> Scanner :: scanTokens() {
 		std :: cout << "Done Scanning\n";
 	}
 	Token tempVar(EOFile, "", "", line);
-	std :: cout << "Done final \n";
+	std :: cout << "EOF Token created \n";
 	tokens.push_back(tempVar);
 	return tokens;
 }

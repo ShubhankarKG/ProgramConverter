@@ -21,6 +21,13 @@ Token :: Token(TokenType type, std :: string lexeme, char cliteral, int line){
     this->line = line;
 }
 
+Token :: Token(TokenType type, std :: string lexeme, long long lliliteral, int line){
+    this->type = type;
+    this->lexeme = lexeme;
+    this->lliliteral = lliliteral;
+    this->line = line;
+}
+
 std :: string Token :: toString(){
     return type + " "+ lexeme + " " + literal;
 }

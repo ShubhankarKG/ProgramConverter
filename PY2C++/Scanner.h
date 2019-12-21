@@ -47,4 +47,5 @@ class Scanner{
     void addToken(TokenType token, string literal);
     void addToken(TokenType token, long double fliteral);
     void addToken(TokenType token, char cliteral);
+    void addToken(TokenType type, long long int lliliteral);
 };

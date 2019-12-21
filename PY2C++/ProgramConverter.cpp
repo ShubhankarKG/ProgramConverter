@@ -11,13 +11,13 @@ void ProgramConverter :: runFile(const string &path){
 
 void ProgramConverter :: run (const string &source){
     Scanner *sc = new Scanner(source);
-    vector <Token*> tokens = sc->scanTokens();
+    vector <Token> tokens = sc->scanTokens();
+    /* for (auto token : tokens){
+        cout << token.toString() << endl;
+    } */
     for (auto token : tokens){
-        cout << token << endl;
+        cout << token.type << "\t" << token.lexeme <<"\t" <<token.line << endl;
     }
-    // for (auto token : tokens){
-    //     cout << token.literal <<" " <<token.line << endl;
-    // }
 }
 
 void ProgramConverter :: runPrompt(){
@@ -25,6 +25,7 @@ void ProgramConverter :: runPrompt(){
         string s;
         cout <<">";
         getline(cin, s);
+        cout << s << endl;
         run (s);
         hadError = false;
     }
