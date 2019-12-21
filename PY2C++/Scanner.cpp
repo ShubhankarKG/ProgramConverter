@@ -56,11 +56,11 @@ Scanner :: Scanner(){
 }
 
 void Scanner :: addToken(TokenType type){
-	addToken(type, "");
+	addToken(type, " ");
 }
 
 void Scanner :: addToken(TokenType type, string literal){
-	string text = source.substr(start, current);
+	string text = source.substr(start, current-start);
 	std :: cout << text <<"\n";
 	
 	Token tempVar(type, text, literal, line);
@@ -69,19 +69,19 @@ void Scanner :: addToken(TokenType type, string literal){
 }
 
 void Scanner :: addToken(TokenType type, long double fliteral){
-	string text = source.substr(start, current);
+	string text = source.substr(start, current-start);
 	Token tempVar(type, text, fliteral, line);
 	tokens.push_back(tempVar);
 }
 
 void Scanner :: addToken(TokenType type, long long int lliliteral){
-	string text = source.substr(start, current);
+	string text = source.substr(start, current-start);
 	Token tempVar(type, text, lliliteral, line);
 	tokens.push_back(tempVar);
 }
 
 void Scanner :: addToken(TokenType type, char cliteral){
-	//string text = source.substr(start, current);
+	string text = source.substr(start, current-start);
 	Token tempVar(type, "", cliteral, line);
 	tokens.push_back(tempVar);
 }
