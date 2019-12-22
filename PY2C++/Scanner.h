@@ -19,7 +19,7 @@ class Scanner{
     static int start;
     static int current;
     static int line;
-    /*    
+    /*
     class StaticConstructor{
         public:
         StaticConstructor();
@@ -38,7 +38,7 @@ class Scanner{
     bool isDigit(char c);
     bool isAlphaNumeric(char c);
     void number();
-    void isString();
+    void isString(char c);
     char peek();
     char peekNext();
     bool match(char expected);

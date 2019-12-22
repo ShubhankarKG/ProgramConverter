@@ -1,0 +1,5 @@
+import random
+i = random.randint(1,10)
+j = 2 ** i
+for i in range(j):
+	print(i+j)

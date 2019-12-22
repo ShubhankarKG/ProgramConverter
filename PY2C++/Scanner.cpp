@@ -52,7 +52,7 @@ Scanner :: Scanner(string source){
 }
 
 Scanner :: Scanner(){
-	
+
 }
 
 void Scanner :: addToken(TokenType type){
@@ -61,11 +61,11 @@ void Scanner :: addToken(TokenType type){
 
 void Scanner :: addToken(TokenType type, string literal){
 	string text = source.substr(start, current-start);
-	std :: cout << text <<"\n";
-	
+	//std :: cout << text <<"\n";
+
 	Token tempVar(type, text, literal, line);
 	tokens.push_back(tempVar);
-	std :: cout << "Token added\n";
+	//std :: cout << "Token added\n";
 }
 
 void Scanner :: addToken(TokenType type, long double fliteral){
@@ -108,8 +108,8 @@ char Scanner :: peek(){
 	return source[current];
 }
 
-void Scanner :: isString(){
-	while (peek() != '"' && !isAtEnd()){
+void Scanner :: isString(char c){
+	while (peek() != c && !isAtEnd()){
 		if (peek() == '\n') line++;
 		advance();
 	}
@@ -119,7 +119,7 @@ void Scanner :: isString(){
 		return;
 	}
 	advance();
-	
+
 	addToken(STRING, source);
 	//std :: cout << value ;
 }
@@ -133,7 +133,7 @@ void Scanner :: number(){
 		while(isDigit(peek())) advance();
 	}
 	// addToken(NUMBER, stod(source.substr(start, current)));
-	string num = source.substr(start, current);
+	string num = source.substr(start, current-start);
 	if(floating) {
 		addToken(NUMBER, stold(num));
 	}
@@ -160,11 +160,11 @@ void Scanner :: identifier(){
 	int count = 0;
 	while (isAlphaNumeric(peek())) {
 		advance();
-		cout << "count=" << count << endl;
-		count++;	
+		//cout << "count=" << count << endl;
+		count++;
 	}
-	string text = source.substr(start, current);
-	cout << text << endl;
+	string text = source.substr(start, current-start);
+	//cout << text << endl;
 	unordered_map<string, TokenType> :: iterator i;
 	TokenType type;
 	i = keywords.find(text);
@@ -189,23 +189,18 @@ void Scanner :: scanToken(){
 	case '.' : addToken(DOT); break;
 	case '-' : addToken(MINUS); break;
 	case '+' : addToken(PLUS); break;
-	case ';' : addToken(SEMICOLON); break;
-	case '*' : addToken(STAR); break;
+	case ':' : addToken(COLON); break;
+	case '[' : addToken(LEFT_SQUARE); break;
+	case ']' : addToken(RIGHT_SQUARE); break;
 
+	case '*' : addToken(match('*') ? POWER : STAR); break;
 	case '!' : addToken(match('=') ? NOT_EQUAL : LOGICAL_NOT); break;
 	case '=' : addToken(match('=') ? EQUAL_EQUAL : EQUAL); break;
 	case '>' : addToken(match('=') ? GREATER_EQUAL : GREATER); break;
 	case '<' : addToken(match('=') ? LESS_EQUAL : LESS); break;
+	case '/' : addToken(match('/') ? DOUBLE_SLASH : SLASH); break;
 
-	case '/' :
-		if (match('/')) {
-			while(peek() != '\n' && isAtEnd()) advance();
-		}
-		else {
-			addToken(SLASH);
-		}
-		break;
-
+	case '#' : 	while(peek() != '\n' && isAtEnd()) advance(); 
 	case ' ' :
 	case '\r':
 	case '\t':
@@ -214,9 +209,10 @@ void Scanner :: scanToken(){
 		line++;
 		break;
 
-	case '"' : isString(); break;
+	case '\"' : isString('\"'); break;
+	case '\'' : isString('\''); break;
 
-	default : 
+	default :
 		if (isDigit(c)) {
 			number();
 		}
@@ -226,6 +222,7 @@ void Scanner :: scanToken(){
 		else {
 			//ProgramConverter::error(line, "Unterminated string.");
 			ProgramConverter pc;
+			cout << "Else switch case \n";
 			pc.error(line, "Unterminated string.");
 		}
 		break;
@@ -241,10 +238,10 @@ vector <Token> Scanner :: scanTokens() {
 	while (!isAtEnd()){
 		start = current;
 		scanToken();
-		std :: cout << "Done Scanning\n";
+		//std :: cout << "Done Scanning\n";
 	}
 	Token tempVar(EOFile, "", "", line);
-	std :: cout << "EOF Token created \n";
+	//std :: cout << "EOF Token created \n";
 	tokens.push_back(tempVar);
 	return tokens;
 }
