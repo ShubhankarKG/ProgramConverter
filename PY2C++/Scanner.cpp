@@ -192,6 +192,7 @@ void Scanner :: scanToken(){
 	case ':' : addToken(COLON); break;
 	case '[' : addToken(LEFT_SQUARE); break;
 	case ']' : addToken(RIGHT_SQUARE); break;
+	case ';' : addToken(SEMICOLON); break;
 
 	case '*' : addToken(match('*') ? POWER : STAR); break;
 	case '!' : addToken(match('=') ? NOT_EQUAL : LOGICAL_NOT); break;
@@ -200,7 +201,7 @@ void Scanner :: scanToken(){
 	case '<' : addToken(match('=') ? LESS_EQUAL : LESS); break;
 	case '/' : addToken(match('/') ? DOUBLE_SLASH : SLASH); break;
 
-	case '#' : 	while(peek() != '\n' && isAtEnd()) advance(); 
+	case '#' : 	while(peek() != '\n' && isAtEnd()) advance();
 	case ' ' :
 	case '\r':
 	case '\t':
@@ -208,9 +209,9 @@ void Scanner :: scanToken(){
 	case '\n':
 		line++;
 		break;
-
 	case '\"' : isString('\"'); break;
 	case '\'' : isString('\''); break;
+	case '\'\'\'' : isString('\'\'\''); break;
 
 	default :
 		if (isDigit(c)) {
