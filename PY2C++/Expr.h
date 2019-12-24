@@ -15,31 +15,26 @@ public:
   ~Expr();
 };
 
-class Binary : public Expr/*, public Visitor */{
+class Binary : public Expr{
 public:
   Expr left, right;
   Token op;
   void accept(Expr* );
-  //void visit(Binary* );
   Binary(Expr left, Token op, Expr right);
-  // ~Binary();
 };
 
-class Grouping : public Expr/*, public Visitor*/ {
+class Grouping : public Expr {
 public:
   Expr expression;
   void accept(Expr* );
-  //void visit(Grouping* );
   Grouping(Expr expression);
-  // ~Grouping();
 };
 
-class Unary : public Expr/*, public Visitor */{
+class Unary : public Expr{
 public:
   Token op;
   Expr right;
   void accept(Expr* );
-  //void visit(Unary* );
   Unary(Token op, Expr right);
 };
 
