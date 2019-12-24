@@ -211,7 +211,7 @@ void Scanner :: scanToken(){
 		break;
 	case '\"' : isString('\"'); break;
 	case '\'' : isString('\''); break;
-	case '\'\'\'' : isString('\'\'\''); break;
+	// case '\'\'\'' : isString('\'\'\''); break;
 
 	default :
 		if (isDigit(c)) {

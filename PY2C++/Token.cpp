@@ -1,5 +1,9 @@
 #include "Token.h"
 
+Token :: Token(){
+  
+}
+
 Token :: Token(TokenType type, std :: string lexeme, std :: string literal, int line){
     this->type = type;
     this->lexeme = lexeme;

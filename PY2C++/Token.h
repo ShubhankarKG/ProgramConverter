@@ -15,6 +15,7 @@ class Token{
     long long int lliliteral;
     char cliteral;
     int line;
+    Token();
     Token(TokenType type, std :: string lexeme, std :: string literal, int line);
     Token(TokenType type, std :: string lexeme, long double fliteral, int line);
     Token(TokenType type, std :: string lexeme, char cliteral, int line);
