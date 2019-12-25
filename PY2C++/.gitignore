@@ -1,3 +1,9 @@
 PY2C++/*.exe
 PY2C++/a.out
 .vscode/
+PY2C++/ProgramConverter.o
+PY2C++/Scanner.o
+PY2C++/Token.o
+PY2C++/TokenType.o
+PY2C++/main.exe
+PY2C++/.vscode
