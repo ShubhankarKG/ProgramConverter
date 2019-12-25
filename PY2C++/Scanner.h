@@ -4,28 +4,17 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
-//#include <any>
-#endif
+#include "ProgramConverter.h"
+#include <stdio.h>
 
 using namespace std;
-
-class Token;
-
-
-
 class Scanner{
     std :: string source;
     vector <Token> tokens;
     static int start;
     static int current;
     static int line;
-    /*
-    class StaticConstructor{
-        public:
-        StaticConstructor();
-    };
-    static StaticConstructor staticConstructor;
-    */
+    
     public :
     unordered_map <string, TokenType> keywords;
     Scanner();
@@ -49,3 +38,5 @@ class Scanner{
     void addToken(TokenType token, char cliteral);
     void addToken(TokenType type, long long int lliliteral);
 };
+
+#endif

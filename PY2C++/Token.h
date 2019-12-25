@@ -1,9 +1,8 @@
-#ifndef TOKEN
-#define TOKEN
+#ifndef TOKEN_H
+#define TOKEN_H
 #include "TokenType.h"
 #include <string>
-//#include <any>
-#endif
+
 
 
 class Token{
@@ -23,3 +22,5 @@ class Token{
 
     std :: string toString();
 };
+
+#endif

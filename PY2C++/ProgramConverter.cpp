@@ -1,9 +1,6 @@
 
 #include "ProgramConverter.h"
-//#include "Token.h"
-#include "Scanner.h"
-#include <cstdlib>
-#include <fstream>
+
 
 bool ProgramConverter :: hadError = false;
 void ProgramConverter :: runFile(const string &path){
@@ -29,7 +26,8 @@ void ProgramConverter :: run (const string &source){
         cout << token.toString() << endl;
     } */
     for (auto token : tokens){
-        cout << token.type << "\t" << token.lexeme <<"\t" <<token.line << endl;
+        cout << token.toString();
+        cout << endl;
     }
 }
 

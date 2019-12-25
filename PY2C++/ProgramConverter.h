@@ -1,8 +1,10 @@
-#ifndef PROGRAM_CONVERTER_H
-#define PROGRAM_CONVERTER_H
+#ifndef PROGRAMCONVERTER_H
+#define PROGRAMCONVERTER_H
 #include <iostream>
 #include <string>
-#endif
+#include "Scanner.h"
+#include <cstdlib>
+#include <fstream>
 
 
 using namespace std;
@@ -15,3 +17,5 @@ class ProgramConverter {
     void run(const string &source);
     void report(int line,const string &where,const string &message);
 };
+
+#endif

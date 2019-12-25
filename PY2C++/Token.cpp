@@ -1,3 +1,4 @@
+
 #include "Token.h"
 
 Token :: Token(){
@@ -33,5 +34,6 @@ Token :: Token(TokenType type, std :: string lexeme, long long lliliteral, int l
 }
 
 std :: string Token :: toString(){
-    return type + " "+ lexeme + " " + literal;
+   std :: string typeString = enum2str(type);
+   return typeString ;
 }

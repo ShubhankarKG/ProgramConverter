@@ -1,7 +1,7 @@
+
 #include "Scanner.h"
 //#include "Token.h"
-#include "ProgramConverter.h"
-#include <stdio.h>
+
 int Scanner :: start = 0;
 int Scanner :: current = 0;
 int Scanner :: line = 1;
@@ -20,7 +20,7 @@ Scanner :: Scanner(string source){
 	keywords.emplace("and", AND);
 	keywords.emplace("as", AS);
 	keywords.emplace("assert", ASSERT);
-	keywords.emplace("async", AYNC);
+	keywords.emplace("async", ASYNC);
 	keywords.emplace("await", AWAIT);
 	keywords.emplace("break", BREAK);
 	keywords.emplace("class", CLASS);
