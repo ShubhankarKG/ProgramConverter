@@ -1,10 +1,10 @@
 #ifndef SCANNER_H
 #define SCANNER_H
-#include "Token.h"
+#include "Token.hpp"
 #include <string>
 #include <unordered_map>
 #include <vector>
-#include "ProgramConverter.h"
+#include "ProgramConverter.hpp"
 #include <stdio.h>
 
 using namespace std;

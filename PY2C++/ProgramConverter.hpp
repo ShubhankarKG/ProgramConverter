@@ -2,7 +2,7 @@
 #define PROGRAMCONVERTER_H
 #include <iostream>
 #include <string>
-#include "Scanner.h"
+#include "Scanner.hpp"
 #include <cstdlib>
 #include <fstream>
 

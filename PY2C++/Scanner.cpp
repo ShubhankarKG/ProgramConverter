@@ -1,5 +1,4 @@
-
-#include "Scanner.h"
+#include "Scanner.hpp"
 //#include "Token.h"
 
 int Scanner :: start = 0;

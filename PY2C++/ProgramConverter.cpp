@@ -1,6 +1,5 @@
 
-#include "ProgramConverter.h"
-
+#include "ProgramConverter.hpp"
 
 bool ProgramConverter :: hadError = false;
 void ProgramConverter :: runFile(const string &path){

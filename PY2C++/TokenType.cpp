@@ -1,4 +1,4 @@
-#include "TokenType.h"
+#include "TokenType.hpp"
 
 std :: string enumToString[86] = {"LEFT_PARAN", "RIGHT_PARAN", "LEFT_BRACE", "RIGHT_BRACE", "LEFT_SQUARE", "RIGHT_SQUARE",
     "COMMA", "DOT", "MINUS", "PLUS", "COLON", "SLASH", "SEMICOLON",
