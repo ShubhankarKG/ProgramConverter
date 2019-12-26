@@ -2,41 +2,42 @@
 #define EXPRESSION_H
 
 #include <iostream>
+#include <sstream>
 #include "Token.hpp"
 
 class Visitor;
 class Expr {
     public:
-    virtual void accept(Visitor* v);
+    virtual void accept(Visitor* v) = 0;
 };
 
 class Binary : public Expr, public Visitor {
     public:
-    Expr left;
-    Token op;
-    Expr right;
+    const Expr& left;
+    const Token op;
+    const Expr& right;
 
-    Binary(Expr left, Token op, Expr right);
+    Binary(const Expr& left,const Token op,const Expr& right);
     void accept(Visitor*);
 };
 
 class Unary : public Expr, public Visitor {
     public:
-    Token op;
-    Expr right;
+    const Token op;
+    const Expr& right;
 
-    Unary(Token op, Expr right);
+    Unary(const Token op,const Expr& right);
     void accept(Visitor*);
 };
 
 class Grouping : public Expr, public Visitor {
     public:
-    Expr expression;
+    const Expr& expression;
 
-    Grouping(Expr expression);
+    Grouping(const Expr& expression);
     void accept(Visitor*);
 };
-
+/*
 class Literal : public Expr, public Visitor {
     public:
     std :: string value;
@@ -48,13 +49,13 @@ class Literal : public Expr, public Visitor {
     Literal(long long int iValue);
     void accept(Visitor*);
 };
-
+*/
 class Visitor {
     public:
-    void visitBinary(){};
-    void visitUnary(){};
-    void visitGrouping(){};
-    void visitLiteral(){};
+    virtual void visitBinary(const Binary&) = 0;
+    virtual void visitUnary(const Unary&) = 0;
+    virtual void visitGrouping(const Grouping&) = 0;
+    //void visitLiteral(){};
 };
 
 #endif

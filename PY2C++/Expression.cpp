@@ -1,44 +1,38 @@
 #include "Expression.hpp"
 
-Binary :: Binary(Expr left, Token op, Expr right){
-    this->left = left;
-    this->op = op;
-    this->right = right;
-}
 
-Unary :: Unary(Token op, Expr right){
-    this->op = op;
-    this->right = right;
-}
+Binary :: Binary(const Expr& left,const Token op,const Expr& right) :
+ left(left), op(op), right(right) {}
 
-Grouping :: Grouping(Expr expression){
-    this->expression = expression;
-}
+Unary :: Unary(const Token op,const Expr& right) : op(op), right(right) {}
 
-Literal :: Literal(std :: string value){
-    this->value = value;
-}
+Grouping :: Grouping(const Expr& expression): expression(expression) {}
 
-Literal :: Literal(long double dValue){
-    this->dValue = dValue;
-}
 
-Literal :: Literal(long long int iValue){
-    this->iValue = iValue;
-}
+// Literal :: Literal(std :: string value){
+//     this->value = value;
+// }
+
+// Literal :: Literal(long double dValue){
+//     this->dValue = dValue;
+// }
+
+// Literal :: Literal(long long int iValue){
+//     this->iValue = iValue;
+// }
 
 void Binary :: accept(Visitor* v){
-    v->visitBinary();
+    v->visitBinary(*this);
 }
 
 void Unary :: accept(Visitor* v){
-    v->visitUnary();
+    v->visitUnary(*this);
 }
 
 void Grouping :: accept(Visitor* v){
-    v->visitGrouping();
+    v->visitGrouping(*this);
 }
 
-void Literal :: accept(Visitor* v){
-    v->visitLiteral();
-}
+// void Literal :: accept(Visitor* v){
+//     v->visitLiteral();
+// }
