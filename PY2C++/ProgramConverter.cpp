@@ -23,8 +23,12 @@ void ProgramConverter :: run (const string &source){
     vector <Token> tokens = sc->scanTokens();
     Parser* parser = new Parser(tokens);
     Expr* expr = parser->parse();
+    cout << "No error \n";
     if (hadError) return;
     cout<< "Parser up, not sure about running\n";
+    // for (auto token : tokens){
+    //     cout << token.toString() << "\n";
+    // }
 }
 
 void ProgramConverter :: runPrompt(){

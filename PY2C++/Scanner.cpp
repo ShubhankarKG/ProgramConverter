@@ -55,34 +55,16 @@ Scanner :: Scanner(){
 }
 
 void Scanner :: addToken(TokenType type){
-	addToken(type, " ");
+	addToken(type, nullptr);
 }
 
-void Scanner :: addToken(TokenType type, string literal){
+void Scanner :: addToken(TokenType type, void* literal){
 	string text = source.substr(start, current-start);
 	//std :: cout << text <<"\n";
 
 	Token tempVar(type, text, literal, line);
 	tokens.push_back(tempVar);
 	//std :: cout << "Token added\n";
-}
-
-void Scanner :: addToken(TokenType type, long double fliteral){
-	string text = source.substr(start, current-start);
-	Token tempVar(type, text, fliteral, line);
-	tokens.push_back(tempVar);
-}
-
-void Scanner :: addToken(TokenType type, long long int lliliteral){
-	string text = source.substr(start, current-start);
-	Token tempVar(type, text, lliliteral, line);
-	tokens.push_back(tempVar);
-}
-
-void Scanner :: addToken(TokenType type, char cliteral){
-	string text = source.substr(start, current-start);
-	Token tempVar(type, "", cliteral, line);
-	tokens.push_back(tempVar);
 }
 
 char Scanner :: advance(){
@@ -118,9 +100,8 @@ void Scanner :: isString(char c){
 		return;
 	}
 	advance();
-
-	addToken(STRING, source);
-	//std :: cout << value ;
+	string value = source.substr(start+1, (current-1) - (start+1));
+	addToken(STRING, &value);
 }
 
 void Scanner :: number(){
@@ -134,10 +115,12 @@ void Scanner :: number(){
 	// addToken(NUMBER, stod(source.substr(start, current)));
 	string num = source.substr(start, current-start);
 	if(floating) {
-		addToken(NUMBER, stold(num));
+		double d = stold(num);
+		addToken(NUMBER,&d);
 	}
 	else {
-		addToken(NUMBER, stoll(num));
+		long long int d = stoll(num);
+		addToken(NUMBER, &d);
 	}
 }
 
@@ -240,7 +223,7 @@ vector <Token> Scanner :: scanTokens() {
 		scanToken();
 		//std :: cout << "Done Scanning\n";
 	}
-	Token tempVar(EOFile, "", "", line);
+	Token tempVar(EOFile, "", nullptr, line);
 	//std :: cout << "EOF Token created \n";
 	tokens.push_back(tempVar);
 	return tokens;

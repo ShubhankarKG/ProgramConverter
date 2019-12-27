@@ -88,15 +88,15 @@ Expr* Parser :: primary(){
     v6.push_back(LEFT_PARAN);
     if (match(v1)) return new Literal(false);
     if (match(v2)) return new Literal(true);
-    if (match(v3)) return new Literal("NONE");
-    if (match(v4)) return new Literal((long double)previous().fliteral);
+    if (match(v3)) return new Literal(nullptr);
+    if (match(v4)) return new Literal(previous().literal);
     if (match(v5)) return new Literal(previous().literal);
     if (match(v6)) {
         Expr* expr = expression();
         consume(RIGHT_PARAN, "Expect ')' after expression.");
         return new Grouping(expr);
     }
-    throw error(peek(), "Expect expression");
+    //throw error(peek(), "Expect expression");
 }
 
 Token Parser :: consume(TokenType type, std :: string message){

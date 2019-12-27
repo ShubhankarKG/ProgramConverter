@@ -33,10 +33,10 @@ class Scanner{
     bool match(char expected);
     char advance();
     void addToken(TokenType token);
-    void addToken(TokenType token, string literal);
-    void addToken(TokenType token, long double fliteral);
-    void addToken(TokenType token, char cliteral);
-    void addToken(TokenType type, long long int lliliteral);
+    void addToken(TokenType token, void* literal);
+    // void addToken(TokenType token, long double fliteral);
+    // void addToken(TokenType token, char cliteral);
+    // void addToken(TokenType type, long long int lliliteral);
 };
 
 #endif
