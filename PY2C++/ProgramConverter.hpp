@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include "Scanner.hpp"
+#include "Parser.hpp"
 #include <cstdlib>
 #include <fstream>
 
@@ -16,6 +17,7 @@ class ProgramConverter {
     void runPrompt();
     void run(const string &source);
     void report(int line,const string &where,const string &message);
+    void error(Token token, string message);
 };
 
 #endif

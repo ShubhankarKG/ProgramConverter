@@ -30,13 +30,13 @@ enum TokenType{
     FALSE, NONE, TRUE, AND, AS, ASSERT, ASYNC,AWAIT, BREAK,
     CLASS, CONTINUE, DEF, DEL, ELIF, ELSE, EXCEPT, FINALLY, FOR, FROM,
     GLOBAL, IF, IMPORT, IN, IS, LAMBDA, NONLOCAL, NOT, OR, PASS,
-    RAISE, RETURN, TRY, WHILE, WITH, YIELD,
+    RAISE, RETURN, TRY, WHILE, WITH, YIELD, NEWLINE,
 
     EOFile
 };
 
 
-extern std :: string enumToString[86];
+extern std :: string enumToString[87];
 
 std :: string enum2str(TokenType type);
 

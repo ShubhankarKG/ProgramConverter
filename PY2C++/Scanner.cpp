@@ -205,7 +205,7 @@ void Scanner :: scanToken(){
 	case '\r':
 	case '\t':
 		break;
-	case '\n':
+	case '\n': //addToken(NEWLINE);
 		line++;
 		break;
 	case '\"' : isString('\"'); break;

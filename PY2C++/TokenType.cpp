@@ -1,6 +1,6 @@
 #include "TokenType.hpp"
 
-std :: string enumToString[86] = {"LEFT_PARAN", "RIGHT_PARAN", "LEFT_BRACE", "RIGHT_BRACE", "LEFT_SQUARE", "RIGHT_SQUARE",
+std :: string enumToString[87] = {"LEFT_PARAN", "RIGHT_PARAN", "LEFT_BRACE", "RIGHT_BRACE", "LEFT_SQUARE", "RIGHT_SQUARE",
     "COMMA", "DOT", "MINUS", "PLUS", "COLON", "SLASH", "SEMICOLON",
     "RIGHTARROW", "ELLIPSIS", "COLONEQUAL","LOGICAL_NOT", "NOT_EQUAL",
     "EQUAL", "EQUAL_EQUAL",
@@ -14,7 +14,7 @@ std :: string enumToString[86] = {"LEFT_PARAN", "RIGHT_PARAN", "LEFT_BRACE", "RI
     "AT", "ATEQUAL","IDENTIFIER", "STRING", "NUMBER", "FALSE", "NONE", "TRUE", "AND", "AS", "ASSERT", "ASYNC","AWAIT", "BREAK",
     "CLASS", "CONTINUE", "DEF", "DEL", "ELIF", "ELSE", "EXCEPT", "FINALLY", "FOR", "FROM",
     "GLOBAL", "IF", "IMPORT", "IN", "IS", "LAMBDA", "NONLOCAL", "NOT", "OR", "PASS",
-    "RAISE", "RETURN", "TRY", "WHILE", "WITH", "YIELD",
+    "RAISE", "RETURN", "TRY", "WHILE", "WITH", "YIELD", "NEWLINE",
     "EOFile"};
 
 std :: string enum2str(TokenType type){
