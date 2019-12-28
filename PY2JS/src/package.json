@@ -1,0 +1,61 @@
+{
+  "type": "module",
+  "name": "src",
+  "version": "2.0.0",
+  "description": "",
+  "main": "ProgramConverter.js",
+  "types": "index.d.ts",
+  "src": "milsymbol-2.0.0/src/milsymbol.js",
+  "scripts": {
+    "lint": "eslint src test --fix",
+    "prebuild": "npm run lint && npm test",
+    "build": "npm run bundle && npm run minify",
+    "build-amd": "npm run bundle-amd && npm run minify-amd",
+    "bundle": "rollup -c",
+    "bundle-amd": "rollup -c rollup.config.amd.js",
+    "minify": "uglifyjs dist/milsymbol.development.js -o dist/milsymbol.js --comments --compress --mangle --source-map",
+    "minify-amd": "uglifyjs dist/amd/milsymbol.development.js -o dist/amd/milsymbol.js --comments --compress --mangle --source-map",
+    "test": "tead --coverage"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/node": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-proposal-decorators": "^7.4.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.4.4",
+    "@babel/plugin-transform-object-assign": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "apollo-server-testing": "^2.4.8",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.8.0",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-dynamic-import-node": "^2.3.0",
+    "babel-plugin-inline-react-svg": "^0.5.2",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "milstd": "^0.1.6",
+    "milstd2525": "github:spatialillusions/mil-std-2525",
+    "prettier": "^1.18.2",
+    "rollup": "^0.58.2",
+    "rollup-plugin-copy": "^0.2.3",
+    "stanagapp6": "github:spatialillusions/stanag-app6",
+    "tead": "^0.5.2",
+    "uglify-js": "^3.6.0"
+  },
+  "babel": {
+    "presets": "env"
+  },
+  "dependencies": {
+    "@std/esm": "^0.26.0",
+    "milsymbol": "^2.0.0"
+  }
+}
