@@ -1,8 +1,11 @@
-#ifndef PROGRAM_CONVERTER_H
-#define PROGRAM_CONVERTER_H
+#ifndef PROGRAMCONVERTER_H
+#define PROGRAMCONVERTER_H
 #include <iostream>
 #include <string>
-#endif
+#include "Scanner.hpp"
+#include "Parser.hpp"
+#include <cstdlib>
+#include <fstream>
 
 
 using namespace std;
@@ -14,4 +17,7 @@ class ProgramConverter {
     void runPrompt();
     void run(const string &source);
     void report(int line,const string &where,const string &message);
+    void error(Token token, string message);
 };
+
+#endif

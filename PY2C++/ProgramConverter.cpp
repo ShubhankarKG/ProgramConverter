@@ -1,9 +1,5 @@
 
-#include "ProgramConverter.h"
-//#include "Token.h"
-#include "Scanner.h"
-#include <cstdlib>
-#include <fstream>
+#include "ProgramConverter.hpp"
 
 bool ProgramConverter :: hadError = false;
 void ProgramConverter :: runFile(const string &path){
@@ -25,11 +21,12 @@ void ProgramConverter :: runFile(const string &path){
 void ProgramConverter :: run (const string &source){
     Scanner *sc = new Scanner(source);
     vector <Token> tokens = sc->scanTokens();
-    /* for (auto token : tokens){
-        cout << token.toString() << endl;
-    } */
+    Parser* parser = new Parser(tokens);
+    Expr* expr = parser->parse();
+    if (hadError) return;
+    cout<< "Parser up, not sure about running\n";
     for (auto token : tokens){
-        cout << token.type << "\t" << token.lexeme <<"\t" <<token.line << endl;
+        cout << token.toString() << "\n";
     }
 }
 
@@ -51,6 +48,15 @@ void ProgramConverter :: report (int line,const string& where,const string& mess
 
 void ProgramConverter :: error (int line,const string& message){
     report (line, "", message);
+}
+
+void ProgramConverter :: error(Token token, string message){
+    if (token.type == EOFile){
+        report(token.line, "at end ", message);
+    }
+    else {
+        report(token.line, " at '" + token.lexeme + "'" , message);
+    }
 }
 
 int main(int args, char* argv[]){

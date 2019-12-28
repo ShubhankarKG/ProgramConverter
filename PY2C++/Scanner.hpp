@@ -1,31 +1,20 @@
 #ifndef SCANNER_H
 #define SCANNER_H
-#include "Token.h"
+#include "Token.hpp"
 #include <string>
 #include <unordered_map>
 #include <vector>
-//#include <any>
-#endif
+#include "ProgramConverter.hpp"
+#include <stdio.h>
 
 using namespace std;
-
-class Token;
-
-
-
 class Scanner{
     std :: string source;
     vector <Token> tokens;
     static int start;
     static int current;
     static int line;
-    /*
-    class StaticConstructor{
-        public:
-        StaticConstructor();
-    };
-    static StaticConstructor staticConstructor;
-    */
+    
     public :
     unordered_map <string, TokenType> keywords;
     Scanner();
@@ -44,8 +33,10 @@ class Scanner{
     bool match(char expected);
     char advance();
     void addToken(TokenType token);
-    void addToken(TokenType token, string literal);
-    void addToken(TokenType token, long double fliteral);
-    void addToken(TokenType token, char cliteral);
-    void addToken(TokenType type, long long int lliliteral);
+    void addToken(TokenType token, void* literal);
+    // void addToken(TokenType token, long double fliteral);
+    // void addToken(TokenType token, char cliteral);
+    // void addToken(TokenType type, long long int lliliteral);
 };
+
+#endif

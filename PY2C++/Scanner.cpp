@@ -1,7 +1,6 @@
-#include "Scanner.h"
+#include "Scanner.hpp"
 //#include "Token.h"
-#include "ProgramConverter.h"
-#include <stdio.h>
+
 int Scanner :: start = 0;
 int Scanner :: current = 0;
 int Scanner :: line = 1;
@@ -20,7 +19,7 @@ Scanner :: Scanner(string source){
 	keywords.emplace("and", AND);
 	keywords.emplace("as", AS);
 	keywords.emplace("assert", ASSERT);
-	keywords.emplace("async", AYNC);
+	keywords.emplace("async", ASYNC);
 	keywords.emplace("await", AWAIT);
 	keywords.emplace("break", BREAK);
 	keywords.emplace("class", CLASS);
@@ -56,34 +55,16 @@ Scanner :: Scanner(){
 }
 
 void Scanner :: addToken(TokenType type){
-	addToken(type, " ");
+	addToken(type, nullptr);
 }
 
-void Scanner :: addToken(TokenType type, string literal){
+void Scanner :: addToken(TokenType type, void* literal){
 	string text = source.substr(start, current-start);
 	//std :: cout << text <<"\n";
 
 	Token tempVar(type, text, literal, line);
 	tokens.push_back(tempVar);
 	//std :: cout << "Token added\n";
-}
-
-void Scanner :: addToken(TokenType type, long double fliteral){
-	string text = source.substr(start, current-start);
-	Token tempVar(type, text, fliteral, line);
-	tokens.push_back(tempVar);
-}
-
-void Scanner :: addToken(TokenType type, long long int lliliteral){
-	string text = source.substr(start, current-start);
-	Token tempVar(type, text, lliliteral, line);
-	tokens.push_back(tempVar);
-}
-
-void Scanner :: addToken(TokenType type, char cliteral){
-	string text = source.substr(start, current-start);
-	Token tempVar(type, "", cliteral, line);
-	tokens.push_back(tempVar);
 }
 
 char Scanner :: advance(){
@@ -119,9 +100,8 @@ void Scanner :: isString(char c){
 		return;
 	}
 	advance();
-
-	addToken(STRING, source);
-	//std :: cout << value ;
+	string value = source.substr(start+1, (current-1) - (start+1));
+	addToken(STRING, &value);
 }
 
 void Scanner :: number(){
@@ -135,10 +115,12 @@ void Scanner :: number(){
 	// addToken(NUMBER, stod(source.substr(start, current)));
 	string num = source.substr(start, current-start);
 	if(floating) {
-		addToken(NUMBER, stold(num));
+		double d = stold(num);
+		addToken(NUMBER,&d);
 	}
 	else {
-		addToken(NUMBER, stoll(num));
+		long long int d = stoll(num);
+		addToken(NUMBER, &d);
 	}
 }
 
@@ -192,6 +174,7 @@ void Scanner :: scanToken(){
 	case ':' : addToken(COLON); break;
 	case '[' : addToken(LEFT_SQUARE); break;
 	case ']' : addToken(RIGHT_SQUARE); break;
+	case ';' : addToken(SEMICOLON); break;
 
 	case '*' : addToken(match('*') ? POWER : STAR); break;
 	case '!' : addToken(match('=') ? NOT_EQUAL : LOGICAL_NOT); break;
@@ -200,17 +183,17 @@ void Scanner :: scanToken(){
 	case '<' : addToken(match('=') ? LESS_EQUAL : LESS); break;
 	case '/' : addToken(match('/') ? DOUBLE_SLASH : SLASH); break;
 
-	case '#' : 	while(peek() != '\n' && isAtEnd()) advance(); 
+	case '#' : 	while(peek() != '\n' && isAtEnd()) advance();
 	case ' ' :
 	case '\r':
 	case '\t':
 		break;
-	case '\n':
+	case '\n': //addToken(NEWLINE);
 		line++;
 		break;
-
 	case '\"' : isString('\"'); break;
 	case '\'' : isString('\''); break;
+	// case '\'\'\'' : isString('\'\'\''); break;
 
 	default :
 		if (isDigit(c)) {
@@ -230,7 +213,7 @@ void Scanner :: scanToken(){
 }
 
 bool Scanner :: isAtEnd() {
-	return current >= source.length();
+	return current >= (int)source.length();
 }
 
 
@@ -240,8 +223,8 @@ vector <Token> Scanner :: scanTokens() {
 		scanToken();
 		//std :: cout << "Done Scanning\n";
 	}
-	Token tempVar(EOFile, "", "", line);
-	//std :: cout << "EOF Token created \n";
+	Token tempVar(EOFile, "", nullptr, line);
+	std :: cout << "Finished scanning \n";
 	tokens.push_back(tempVar);
 	return tokens;
 }
