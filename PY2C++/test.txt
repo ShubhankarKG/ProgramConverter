@@ -1,5 +1,5 @@
-import random
-i = random.randint(1,10)
-j = 2 ** i
-for i in range(j):
-	print(i+j)
+2+3=5
+5*3=67
+6/2!=4
+3 * (2 + 5) = 46
+please stop this !

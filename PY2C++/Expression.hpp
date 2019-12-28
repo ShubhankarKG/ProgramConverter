@@ -14,19 +14,19 @@ class Expr {
 class Binary : public Expr {
     public:
     const Expr* left;
-    const Token op;
+    const Token* op;
     const Expr* right;
 
-    Binary(const Expr* left,const Token op,const Expr* right);
+    Binary(const Expr* left,const Token* op,const Expr* right);
     void accept(Visitor*);
 };
 
 class Unary : public Expr {
     public:
-    const Token op;
+    const Token* op;
     const Expr* right;
 
-    Unary(const Token op,const Expr* right);
+    Unary(const Token* op,const Expr* right);
     void accept(Visitor*);
 };
 
@@ -40,15 +40,16 @@ class Grouping : public Expr {
 
 class Literal : public Expr {
     public:
-    std :: string value;
-    long double dValue;
-    long long int iValue;
-    bool bValue;
-
-    Literal(bool bValue);
-    Literal(std::string value);
-    Literal(long double dValue);
-    Literal(long long int iValue);
+    // std :: string value;
+    // long double dValue;
+    // long long int iValue;
+    // bool bValue;
+    void* literal;
+    Literal(void* literal);
+    // Literal(bool bValue);
+    // Literal(std::string value);
+    // Literal(long double dValue);
+    // Literal(long long int iValue);
     void accept(Visitor*);
 };
 

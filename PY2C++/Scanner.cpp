@@ -224,7 +224,7 @@ vector <Token> Scanner :: scanTokens() {
 		//std :: cout << "Done Scanning\n";
 	}
 	Token tempVar(EOFile, "", nullptr, line);
-	//std :: cout << "EOF Token created \n";
+	std :: cout << "Finished scanning \n";
 	tokens.push_back(tempVar);
 	return tokens;
 }

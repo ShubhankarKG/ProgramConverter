@@ -29,16 +29,16 @@ class Parser{
     Expr* unary();
     Expr* primary();
 
-    Token advance();
-    Token previous();
-    Token peek();
-    Token consume(TokenType, std::string);
+    Token* advance();
+    Token* previous();
+    Token* peek();
+    Token* consume(TokenType, std::string);
 
     bool isAtEnd();
     bool check(TokenType);
     bool match(std :: vector <TokenType> &);
 
-    ParseError error(Token token, std :: string message);
+    ParseError error(Token* token, std :: string message);
 
     void synchronize();
 
